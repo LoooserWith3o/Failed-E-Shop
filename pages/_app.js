@@ -1,7 +1,27 @@
-import '../styles/globals.css'
+import { css, Global } from '@emotion/react';
+import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  useEffect(() => {
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+  return <Component {...pageProps} />;
 }
-
-export default MyApp
+<Global
+  styles={css`
+    html,
+    body {
+      padding: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+        sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
+  `}
+/>;
+export default MyApp;
